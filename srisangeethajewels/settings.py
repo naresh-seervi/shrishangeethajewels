@@ -69,7 +69,7 @@ DATABASES = {
         'NAME': os.environ.get('postgres'),
         'USER': os.environ.get('postgres'),
         'PASSWORD': os.environ.get('pg_hba.conf'),
-        'HOST': os.environ.get('127.0.0.1'),
+        'HOST': os.environ.get('srisangeethajewels.onrender.com'),
         'PORT': '5432',
     }
 }
