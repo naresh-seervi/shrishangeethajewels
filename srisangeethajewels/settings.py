@@ -73,7 +73,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+CSRF_TRUSTED_ORIGINS = ['https://srisangeethajewels.onrender.com']
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
