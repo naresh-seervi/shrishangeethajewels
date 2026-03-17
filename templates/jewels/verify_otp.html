@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Verify OTP - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Verify your email</h2>
+                        <p class="text-center text-muted mb-4">We sent a 6-digit OTP to <strong>{{ email }}</strong>. Enter it below.</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_otp" class="form-label">OTP</label>
+                                {{ form.otp }}
+                                {% if form.otp.errors %}
+                                    <div class="text-danger small">{{ form.otp.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Verify</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p class="small text-muted">OTP is valid for 10 minutes. Didn't receive? <a href="{% url 'register' %}">Register again</a> to get a new one.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

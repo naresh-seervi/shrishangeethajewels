@@ -1,0 +1,29 @@
+1). after booking check the status of booking in card section donn't remove it
+2). jab me item pe click karu tab item ke details aajae admin jab item add karta hai to use aak section me item ke bare me or additional add kar sakta hai and us item ka aak url aajae jese me copy karke kahe pest karu to onyl vo item he show ho 
+3). image ke shat video ko bhi add kar saku and image multiple add kar saku , admin pannel pe show ho jae ke customer me kia order kia hai or konsa customer hai
+5). OTP se verify ho email se 
+6). username wale section ko hata do mobile number and email se he login kar sake
+
+only admin login are chage the admin fecility
+
+
+4). admin access only admin ko he show ho jo admin nhi hai use admin section show nhi ho
+
+
+
+
+
+usename: jagdesh
+email: menareshseervi@gmail.com
+password: naresh@shop
+
+
+
+
+customer:
+seervinaresh620@gmail.com
+naru@nnseervi
+
+testing@gmail.com
+naresh@123
+

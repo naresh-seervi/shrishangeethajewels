@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="login-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Login</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_email_or_mobile" class="form-label">Email or Mobile Number</label>
+                                {{ form.email_or_mobile }}
+                            </div>
+                            {% comment %} <div class="mb-3">
+                                <label for="id_password" class="form-label">Password</label>
+                                {{ form.password }}
+                                
+                            </div> {% endcomment %}
+                            <div class="mb-3 position-relative">
+                                <label for="id_password" class="form-label">Password</label>
+                                <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" style="padding-right: 45px;">
+                                <button type="button" id="togglePassword"
+                                    style="
+                                        position: absolute;
+                                        top: 73%;
+                                        right: 15px;
+                                        transform: translateY(-50%);
+                                        border: none;
+                                        background: transparent;
+                                        padding: 0;
+                                        cursor: pointer;
+                                    ">
+                                    <i class="bi bi-eye" id="toggleIcon"></i>
+                                </button>
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

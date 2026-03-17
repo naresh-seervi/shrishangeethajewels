@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manage Items - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="manage-items py-5">
+    <div class="container">
+        <h2 class="mb-4">Manage Items</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Add New Item</h5>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_name" class="form-label">Item Name</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_image" class="form-label">Main Image</label>
+                                {{ form.image }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Additional Images (multiple)</label>
+                                <input type="file" name="extra_images" class="form-control" multiple accept="image/*">
+                                <small class="text-muted">You can select multiple images.</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_video_url" class="form-label">Video URL (optional)</label>
+                                {{ form.video_url }}
+                                <small class="text-muted">e.g. https://www.youtube.com/embed/VIDEO_ID</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_description" class="form-label">Description / Additional Info</label>
+                                {{ form.description }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_weight" class="form-label">Weight (grams)</label>
+                                {{ form.weight }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_item_type" class="form-label">Type</label>
+                                {{ form.item_type }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Item</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">All Items</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Weight</th>
+                                        <th>Price</th>
+                                        <th>Video</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                    <tr>
+                                        <td><img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 60px; height: 60px; object-fit: cover;"> {% if item.extra_images.count %}<span class="badge bg-secondary">+{{ item.extra_images.count }}</span>{% endif %}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.get_item_type_display }}</td>
+                                        <td>{{ item.weight }} grams</td>
+                                        <td>₹{{ item.price|floatformat:2 }}</td>
+                                        <td>{% if item.video_url %}<span class="badge bg-info">Yes</span>{% else %}—{% endif %}</td>
+                                        <td>
+                                            {% if item.is_active %}
+                                                <span class="badge bg-success">Active</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Inactive</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

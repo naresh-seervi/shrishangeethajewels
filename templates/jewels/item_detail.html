@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ item.name }} - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="product-gallery">
+                    <img src="{{ item.image.url }}" class="img-fluid rounded shadow-sm mb-3" alt="{{ item.name }}" id="mainImage">
+                    {% if item.extra_images.all %}
+                    <div class="d-flex gap-2 flex-wrap mt-2">
+                        <img src="{{ item.image.url }}" class="thumb rounded border" style="width:70px;height:70px;object-fit:cover;cursor:pointer" alt="" data-src="{{ item.image.url }}">
+                        {% for ei in item.extra_images.all %}
+                        <img src="{{ ei.image.url }}" class="thumb rounded border" style="width:70px;height:70px;object-fit:cover;cursor:pointer" alt="" data-src="{{ ei.image.url }}">
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% if item.video_url %}
+                <div class="mt-4">
+                    <h5>Video</h5>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="{{ item.video_embed_url|default:item.video_url }}" title="Item video" allowfullscreen></iframe>
+                    </div>
+                    <p class="small text-muted">If the video doesn't load, <a href="{{ item.video_url }}" target="_blank" rel="noopener">open link</a>.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button">Details</button>
+                        <button class="nav-link" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button">Additional Info</button>
+                    </div>
+                </nav>
+                <div class="tab-content border border-top-0 p-3 rounded-bottom" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-details">
+                        <h2 class="mb-3">{{ item.name }}</h2>
+                        <p><strong>Type:</strong> {{ item.get_item_type_display }}</p>
+                        <p><strong>Weight:</strong> {{ item.weight }} grams</p>
+                        <p><strong>Price:</strong> ₹{{ item.price|floatformat:2 }}</p>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary mt-2">Login to Add to Cart</a>
+                        {% endif %}
+                    </div>
+                    <div class="tab-pane fade" id="nav-info">
+                        {% if item.description %}
+                        <div class="mb-3">{{ item.description|linebreaks }}</div>
+                        {% else %}
+                        <p class="text-muted">No additional information for this item.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- <div class="mt-4 p-3 bg-light rounded">
+                    <label class="form-label small text-muted">Share this item</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="itemUrl" value="{{ item_url }}" readonly>
+                        <button class="btn btn-outline-secondary" type="button" id="copyUrlBtn"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <p class="small text-muted mt-2">Paste this URL anywhere to show only this item.</p>
+                </div> -->
+                
+                </div>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to all items</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+        var src = this.getAttribute('data-src');
+        if (src) document.getElementById('mainImage').src = src;
+    });
+});
+var copyBtn = document.getElementById('copyUrlBtn');
+if (copyBtn) copyBtn.addEventListener('click', function() {
+    var input = document.getElementById('itemUrl');
+    input.select();
+    document.execCommand('copy');
+    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    var btn = this;
+    setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+});
+</script>
+{% endblock %}

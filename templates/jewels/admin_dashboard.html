@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="admin-dashboard py-5">
+    <div class="container">
+        <h1 class="mb-5">Admin Dashboard</h1>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <i class="fas fa-rupee-sign fa-3x text-primary mb-3"></i>
+                        <h5>Manage Rates</h5>
+                        <p class="text-muted">Update gold and silver rates</p>
+                        <a href="{% url 'manage_rates' %}" class="btn btn-primary">Manage Rates</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <i class="fas fa-gem fa-3x text-primary mb-3"></i>
+                        <h5>Manage Items</h5>
+                        <p class="text-muted">Add and manage jewelry items</p>
+                        <a href="{% url 'manage_items' %}" class="btn btn-primary">Manage Items</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shopping-bag fa-3x text-primary mb-3"></i>
+                        <h5>Manage Orders</h5>
+                        <p class="text-muted">View orders and which customer placed them</p>
+                        <a href="{% url 'manage_orders' %}" class="btn btn-primary">Manage Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shopping-bag fa-3x text-primary mb-3"></i>
+                        <h5>Manage Orders</h5>
+                        <p class="text-muted">View what customers ordered</p>
+                        <a href="{% url 'manage_orders' %}" class="btn btn-primary">Manage Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h5>Manage Customers</h5>
+                        <p class="text-muted">View and manage customers</p>
+                        <a href="{% url 'manage_customers' %}" class="btn btn-primary">Manage Customers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

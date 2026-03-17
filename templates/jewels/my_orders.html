@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}My Orders - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">My Orders (Booking Status)</h2>
+        <p class="text-muted">Your orders are listed below. Status is shown on each card.</p>
+        {% if orders %}
+            <div class="row">
+                {% for order in orders %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm border">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <strong>Order #{{ order.id }}</strong>
+                            <span class="badge
+                                {% if order.status == 'pending' %}bg-warning text-dark
+                                {% elif order.status == 'confirmed' %}bg-info
+                                {% elif order.status == 'delivered' %}bg-success
+                                {% elif order.status == 'cancelled' %}bg-danger
+                                {% else %}bg-secondary{% endif %}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </div>
+
+                        <div class="card-body">
+                            <p class="small text-muted mb-2">Placed on {{ order.created_at|date:"d M Y, H:i" }}</p>
+                            <ul class="list-unstyled mb-2">
+                                {% for oi in order.orderitem_set.all %}
+                                <li>{{ oi.item.name }} &times; {{ oi.quantity }} &ndash; ₹{{ oi.price|floatformat:2|mul:oi.quantity }}</li>
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                            <p class="mb-1"><strong>Total: ₹{{ order.total_amount|floatformat:2 }}</strong></p>
+                            <p class="small text-muted mb-0">Address: {{ order.address|truncatewords:10 }}</p><br>
+                            <p class="small text-muted mb-0">To cancel your order: <a href="tel:9999999999">9999999999</a></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <h4>You have no orders yet</h4>
+                <p class="text-muted">Place an order from the cart to see it here.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary">Browse items</a>
+            </div>
+        {% endif %}
+        <div class="mt-4">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

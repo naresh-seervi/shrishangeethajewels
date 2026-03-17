@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manage Rates - Srisangeethajewels{% endblock %}
+
+{% block content %}
+<section class="manage-rates py-5">
+    <div class="container">
+        <h2 class="mb-4">Manage Rates</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Set New Rate</h5>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_rate_type" class="form-label">Type</label>
+                                {{ form.rate_type }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_per_gram_rate" class="form-label">Per Gram Rate (₹)</label>
+                                {{ form.per_gram_rate }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Rate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Recent Rates</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Rate (₹/gram)</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rate in rates %}
+                                <tr>
+                                    <td>{{ rate.get_rate_type_display }}</td>
+                                    <td>₹{{ rate.per_gram_rate|floatformat:2 }}</td>
+                                    <td>{{ rate.date }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
