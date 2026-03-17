@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'srisangeethajewels_db',
         'USER': 'srisangeethajeweller',  
         'PASSWORD':'Hello123456',  
-        'HOST': 'localhost',
+        'HOST': 'srisangeethajewels.onrender.com',
         'PORT': '3306',
     }
 }
