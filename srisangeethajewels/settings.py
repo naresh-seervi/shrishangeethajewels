@@ -4,12 +4,13 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com']
-
+# ALLOWED_HOSTS = ['your-app-name.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://srisangeethajewels.onrender.com']
 
 # INSTALLED APPS
 INSTALLED_APPS = [
@@ -73,7 +74,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-CSRF_TRUSTED_ORIGINS = ['https://srisangeethajewels.onrender.com']
+
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
