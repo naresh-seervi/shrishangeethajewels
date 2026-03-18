@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'root',
         'PASSWORD': 'iaUtLhkKZuQwRHIeFUqvphgBFbMBKEap',
-        'HOST': 'shrishangeethajewels.onrender.com',
+        'HOST': 'interchange.proxy.rlwy.',
         'PORT': '19492',
     }
 }
