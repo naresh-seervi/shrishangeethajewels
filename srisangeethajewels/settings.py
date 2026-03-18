@@ -80,8 +80,11 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'root',
         'PASSWORD': 'iaUtLhkKZuQwRHIeFUqvphgBFbMBKEap',
-        'HOST': 'interchange.proxy.rlwy.',
+        'HOST': 'interchange.proxy.rlwy.net',  # FIXED ✅
         'PORT': '19492',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
