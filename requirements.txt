@@ -13,3 +13,4 @@ gunicorn
 whitenoise
 psycopg2-binary
 mysqlclient==2.2.1
+whitenoise
