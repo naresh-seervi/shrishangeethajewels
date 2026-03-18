@@ -12,3 +12,4 @@ tzdata==2025.3
 gunicorn
 whitenoise
 psycopg2-binary
+mysqlclient==2.2.1
