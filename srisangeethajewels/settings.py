@@ -9,7 +9,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DEBUG = False
 
-# ALLOWED_HOSTS = ['your-app-name.onrender.com']
+ALLOWED_HOSTS = ['shrishangeethajewels.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://srisangeethajewels.onrender.com']
 
 # INSTALLED APPS
