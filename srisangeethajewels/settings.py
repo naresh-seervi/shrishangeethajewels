@@ -3,19 +3,16 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ================= SECURITY =================
+# SECURITY
 SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')
-
-DEBUG = False
-
-ALLOWED_HOSTS = ['shrishangeethajewels.onrender.com']
-
-CSRF_TRUSTED_ORIGINS = ['https://shrishangeethajewels.onrender.com']
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+DEBUG = True
 
-# ================= APPS =================
+ALLOWED_HOSTS = ['shrishangeethajewels.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://srisangeethajewels.onrender.com']
+
+# INSTALLED APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,10 +27,10 @@ INSTALLED_APPS = [
 ]
 
 
-# ================= MIDDLEWARE =================
+# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # static fix
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # IMPORTANT
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,7 +43,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'srisangeethajewels.urls'
 
 
-# ================= TEMPLATES =================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,23 +63,32 @@ TEMPLATES = [
 WSGI_APPLICATION = 'srisangeethajewels.wsgi.application'
 
 
-# ================= DATABASE (Railway MySQL) =================
+# ✅ DATABASE (POSTGRESQL - AUTO FROM RENDER)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('postgres'),
+#         'USER': os.environ.get('postgres'),
+#         'PASSWORD': os.environ.get('pg_hba.conf'),
+#         'HOST': os.environ.get('srisangeethajewels.onrender.com'),
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE', 'railway'),
-        'USER': os.environ.get('MYSQLUSER', 'root'),
-        'PASSWORD': os.environ.get('MYSQLPASSWORD', 'your-password'),
-        'HOST': os.environ.get('MYSQLHOST', 'interchange.proxy.rlwy.net'),
-        'PORT': os.environ.get('MYSQLPORT', '19492'),
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'iaUtLhkKZuQwRHIeFUqvphgBFbMBKEap',
+        'HOST': 'interchange.proxy.rlwy.net',  # FIXED ✅
+        'PORT': '19492',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
 }
 
-
-# ================= PASSWORD VALIDATION =================
+# PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -92,39 +97,37 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ================= INTERNATIONAL =================
+# INTERNATIONAL
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
 
-# ================= STATIC FILES =================
+# STATIC FILES
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-# ================= MEDIA FILES =================
+# MEDIA FILES
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# ================= DEFAULT =================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# ================= CUSTOM USER =================
+# CUSTOM USER
 AUTH_USER_MODEL = 'jewels.CustomUser'
 
 
-# ================= CRISPY =================
+# CRISPY
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
-# ================= EMAIL =================
+# EMAIL (SAFE VIA ENV)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -133,7 +136,8 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
-# ================= LOGIN =================
+# LOGIN
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
