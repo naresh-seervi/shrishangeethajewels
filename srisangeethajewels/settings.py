@@ -64,17 +64,26 @@ WSGI_APPLICATION = 'srisangeethajewels.wsgi.application'
 
 
 # ✅ DATABASE (POSTGRESQL - AUTO FROM RENDER)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('postgres'),
+#         'USER': os.environ.get('postgres'),
+#         'PASSWORD': os.environ.get('pg_hba.conf'),
+#         'HOST': os.environ.get('srisangeethajewels.onrender.com'),
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('postgres'),
-        'USER': os.environ.get('postgres'),
-        'PASSWORD': os.environ.get('pg_hba.conf'),
-        'HOST': os.environ.get('srisangeethajewels.onrender.com'),
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'iaUtLhkKZuQwRHIeFUqvphgBFbMBKEap',
+        'HOST': 'interchange.proxy.rlwy.net',
+        'PORT': '19492',
     }
 }
-
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
